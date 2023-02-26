@@ -47,6 +47,7 @@
     window.addEventListener(
       "message",
       function (event) {
+        document.body.innerHTML = "";
         yomiQuery(event.data, document.body);
         // if (event.origin === window.location.origin) {
         //   yomiQuery(event.data, document.body);
