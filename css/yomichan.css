@@ -1,0 +1,11 @@
+#yomichan-panel {
+  background-color: white;
+  position: absolute;
+  z-index: 100;
+  visibility: hidden;
+  width: 500px;
+  height: 400px;
+  border: 1px solid black;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  overflow-y: auto;
+}

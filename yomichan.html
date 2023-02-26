@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yomichan</title>
+
+  <link rel="stylesheet" href="yomichan/ext/css/display.css">
+  <link rel="stylesheet" href="yomichan/ext/css/display-pronunciation.css">
+  <link rel="stylesheet" href="yomichan/ext/css/action-popup.css">
+  <link rel="stylesheet" href="yomichan/ext/css/material.css">
+
+  <script src="yomichan/ext/js/language/dictionary-database.js"></script>
+  <script src="yomichan/ext/js/language/dictionary-importer.js"></script>
+  <script src="yomichan/ext/js/language/deinflector.js"></script>
+  <script src="yomichan/ext/js/language/translator.js"></script>
+  <script src="yomichan/ext/js/language/dictionary-importer-media-loader.js"></script>
+  <script src="yomichan/ext/js/language/sandbox/japanese-util.js"></script>
+  <script src="yomichan/ext/js/data/database.js"></script>
+  <script src="yomichan/ext/js/data/json-schema.js"></script>
+  <script src="yomichan/ext/js/core.js"></script>
+  <script src="yomichan/ext/js/general/regex-util.js"></script>
+  <script src="yomichan/ext/js/general/text-source-map.js"></script>
+  <script src="yomichan/ext/js/display/display-generator.js"></script>
+  <script src="yomichan/ext/js/display/display-content-manager.js"></script>
+  <script src="yomichan/ext/js/display/sandbox/structured-content-generator.js"></script>
+  <script src="yomichan/ext/js/display/sandbox/pronunciation-generator.js"></script>
+  <script src="yomichan/ext/js/dom/html-template-collection.js"></script>
+  <script src="yomichan/ext/js/language/sandbox/dictionary-data-util.js"></script>
+  <script src="yomichan/ext/lib/jszip.min.js"></script>
+  <script src="yomichan/ext/lib/wanakana.min.js"></script>
+
+  <script src="js/yomichan.js"></script>
+
+  <style>
+    body {
+      overflow-y: scroll;
+    }
+  </style>
+</head>
+
+<body>
+  Yomichan
+  <script>
+    window.addEventListener(
+      "message",
+      function (event) {
+        yomiQuery(event.data, document.body);
+        // if (event.origin === window.location.origin) {
+        //   yomiQuery(event.data, document.body);
+        // }
+      },
+      false
+    );
+  </script>
+</body>
+
+</html>

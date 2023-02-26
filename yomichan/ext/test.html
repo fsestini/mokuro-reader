@@ -1,0 +1,273 @@
+<html>
+<head>
+    <link rel="stylesheet" href="css/display.css">
+    <!-- <link rel="stylesheet" href="css/material.css"> -->
+    <link rel="stylesheet" href="css/display-pronunciation.css">
+    <link rel="stylesheet" href="css/action-popup.css">
+
+    <script src="js/language/dictionary-database.js"></script>
+    <script src="js/language/dictionary-importer.js"></script>
+    <script src="js/language/deinflector.js"></script>
+    <script src="js/language/translator.js"></script>
+    <script src="js/language/dictionary-importer-media-loader.js"></script>
+    <script src="js/language/sandbox/japanese-util.js"></script>
+    <script src="js/data/database.js"></script>
+    <script src="js/data/json-schema.js"></script>
+    <script src="js/core.js"></script>
+    <script src="js/general/regex-util.js"></script>
+    <script src="js/general/text-source-map.js"></script>
+    <script src="js/display/display-generator.js"></script>
+    <script src="js/display/display-content-manager.js"></script>
+    <script src="js/display/sandbox/structured-content-generator.js"></script>
+    <script src="js/display/sandbox/pronunciation-generator.js"></script>
+    <script src="js/dom/html-template-collection.js"></script>
+    <script src="js/language/sandbox/dictionary-data-util.js"></script>
+    <script src="lib/jszip.min.js"></script>
+    <script src="lib/wanakana.min.js"></script>
+</head>
+<body>
+    <p>Installed dictionaries:</p>
+    <ul id="dictlist">
+    </ul>
+
+    <h3>Choose the local(s) zip file(s)</h3>
+<p class="note">Note : your browser will process the zip file, don't choose a file too big !</p>
+<input type="file" id="file" name="file" multiple /><br />
+
+<div id="result_block" class="hidden">
+  <h3>Content :</h3>
+  <div id="result"></div>
+
+    <div>
+        <input id="query" type="text" />
+        <button onClick="onQuery()">
+        Query
+        </button>
+        
+        <div id="yomicontainer" style="overflow-y: scroll; height: 300px;"></div>
+
+        </div>
+        
+</div>
+
+    <script>
+        var dictionaryDatabase;
+        var translator;
+        var japaneseUtil;
+
+        (async () => {
+            dictionaryDatabase = new DictionaryDatabase();
+            await dictionaryDatabase.prepare();
+            japaneseUtil = new JapaneseUtil(wanakana);
+            translator = new Translator({
+                japaneseUtil: japaneseUtil,
+                database: dictionaryDatabase
+            });
+            const deinflectionReasions = await _fetchAsset('http://100.90.248.96:8080/data/deinflect.json', true);
+            translator.prepare(deinflectionReasions);
+
+            await populateDictionaryList();
+        })();
+
+        async function populateDictionaryList() {
+            const info = await dictionaryDatabase.getDictionaryInfo();
+            const ul = document.getElementById("dictlist");
+            ul.innerHTML = "";
+            for (i of info) {
+                const li = document.createElement("li");
+                li.innerText = i.title;
+                ul.appendChild(li);
+            }
+        }
+ 
+        async function onQuery() {
+            const qtxt = document.getElementById("query");
+            const query = qtxt.value;
+
+            //var dictionaryDatabase = new DictionaryDatabase();
+            //await dictionaryDatabase.prepare();
+            //console.log(dictionaryDatabase.isPrepared());
+
+            /* japaneseUtil = new JapaneseUtil(wanakana);
+            translator = new Translator({
+                japaneseUtil: japaneseUtil,
+                database: dictionaryDatabase
+            }); */
+            // const deinflectionReasions = await _fetchAsset('http://127.0.0.1:8080/data/deinflect.json', true);
+            // translator.prepare(deinflectionReasions);
+
+            var dset = new Map();
+            dset.set("JMdict (English)", {index: 0, priority: 1});
+            dset.set("KireiCake", {index: 1, priority: 0});
+
+            let termResults = await translator.findTerms('split', query, {
+                enabledDictionaryMap: dset,
+                mainDictionary: "JMdict (English)",
+                excludeDictionaryDefinitions: null,
+                sortFrequencyDictionary: null,
+                deinflect: true,
+                removeNonJapaneseCharacters: true,
+                convertHalfWidthCharacters: 'false',
+                convertNumericCharacters: 'false',
+                convertAlphabeticCharacters: 'false',
+                convertHiraganaToKatakana: 'false',
+                convertKatakanaToHiragana: 'variant',
+                collapseEmphaticSequences: 'true',
+                textReplacements: [null],
+                matchType: 'exact'
+            })
+            
+            const _contentManager = new DisplayContentManager(null);
+            const _displayGenerator = new DisplayGenerator({
+                japaneseUtil,
+                contentManager: _contentManager
+            });
+            await _displayGenerator.prepare();
+
+            const yomicontainer = document.getElementById("yomicontainer");
+            yomicontainer.innerHTML = "";
+            for (r of termResults.dictionaryEntries) {
+                console.log(r.headwords[0].term);
+
+                const node = _displayGenerator.createTermEntry(r);
+                console.log(node);
+                yomicontainer.appendChild(node);
+            }
+
+            await dictionaryDatabase.close();
+        }
+
+        async function purgeKirei() {
+            var dictionaryDatabase = new DictionaryDatabase();
+            await dictionaryDatabase.prepare();
+            console.log(dictionaryDatabase.isPrepared());
+
+            await dictionaryDatabase.deleteDictionary("KireiCake", 1000, x => {
+                console.log(x.processed + " " + x.count);
+            });
+
+            await dictionaryDatabase.close();
+        }
+
+        function createDictionaryImporter(onProgress) {
+            const dictionaryImporterMediaLoader = new DictionaryImporterMediaLoader();
+            return new DictionaryImporter(dictionaryImporterMediaLoader, (...args) => {
+                const {stepIndex, stepCount, index, count} = args[0];
+                //console.log(stepIndex < stepCount);
+                //console.log(index <= count);
+                console.log(stepIndex + " " + stepCount + " " + index + " " + count);
+                if (typeof onProgress === 'function') {
+                    onProgress(...args);
+                }
+            });
+        }
+
+        document.querySelector('input[name="file"]').addEventListener('change', async (e) => {
+            var dictionaryDatabase = new DictionaryDatabase();
+            await dictionaryDatabase.prepare();
+            console.log(dictionaryDatabase.isPrepared());
+
+            const file = e.target.files[0];
+            console.log(file);
+            const archiveContent = await _readFile(file);
+
+            const dictionaryImporter = createDictionaryImporter(() => { progressEvent = true; });
+            const {result, errors} = await dictionaryImporter.importDictionary(
+                dictionaryDatabase,
+                archiveContent,
+                {prefixWildcardsSupported: true}
+            );
+            console.log(progressEvent);
+            
+            await dictionaryDatabase.close();
+        });
+
+        function _readFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = () => reject(reader.error);
+                reader.readAsArrayBuffer(file);
+            });
+        }
+        
+        async function _fetchAsset(url, json=false) {
+            const response = await fetch(url, {
+                method: 'GET',
+                //mode: 'no-cors',
+                cache: 'default',
+                credentials: 'omit',
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer'
+            });
+            if (!response.ok) {
+                throw new Error(`Failed to fetch ${url}: ${response.status}`);
+            }
+            return await (json ? response.json() : response.text());
+        }
+
+
+
+        async function asd() {
+            var dictionaryDatabase = new DictionaryDatabase();
+            await dictionaryDatabase.prepare();
+            console.log(dictionaryDatabase.isPrepared());
+/* 
+            const testDictionary = createTestDictionaryArchive('valid-dictionary1');
+            const testDictionarySource = await testDictionary.generateAsync({type: 'arraybuffer'});
+
+            const dictionaryImporter = createDictionaryImporter(() => { progressEvent = true; });
+            const {result, errors} = await dictionaryImporter.importDictionary(
+                dictionaryDatabase,
+                testDictionarySource,
+                {prefixWildcardsSupported: true}
+            );
+            console.log(progressEvent); */
+
+            // Get info summary
+            console.log('getting info');
+            const info = await dictionaryDatabase.getDictionaryInfo();
+            console.log(info)
+
+
+            japaneseUtil = new JapaneseUtil(wanakana);
+            translator = new Translator({
+                japaneseUtil: japaneseUtil,
+                database: dictionaryDatabase
+            });
+            const deinflectionReasions = await _fetchAsset('http://100.90.248.96:8080/data/deinflect.json', true);
+            translator.prepare(deinflectionReasions);
+
+            var dset = new Map();
+            dset.set("Test Dictionary", {index: 0, priority: 0});
+
+            let results = await translator.findKanji("打", { enabledDictionaryMap: dset })
+            console.log(results);
+
+            let termResults = await translator.findTerms('simple', '熱海うちこめて殺すちげーよ', {
+                enabledDictionaryMap: dset,
+                mainDictionary: "Test Dictionary",
+                excludeDictionaryDefinitions: null,
+                sortFrequencyDictionary: null,
+                deinflect: true,
+                removeNonJapaneseCharacters: true,
+                convertHalfWidthCharacters: 'false',
+                convertNumericCharacters: 'false',
+                convertAlphabeticCharacters: 'false',
+                convertHiraganaToKatakana: 'false',
+                convertKatakanaToHiragana: 'variant',
+                collapseEmphaticSequences: 'true',
+                textReplacements: [null],
+                matchType: 'exact'
+            })
+            console.log(termResults);
+            for (r of termResults.dictionaryEntries) {
+                console.log(r.headwords[0].term);
+            }
+
+            await dictionaryDatabase.close();
+        }
+
+    </script>
+</body>
+</html>
