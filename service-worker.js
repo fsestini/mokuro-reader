@@ -1,7 +1,7 @@
-const cacheName = 'mokuro-web-cache-v1';
+const cacheName = 'mokuro-web-cache-v2';
 
 const precacheResources = [
-  '/',
+  '.',
   'index.html',
   'css/mokuro.css',
   'css/yomichan.css',
