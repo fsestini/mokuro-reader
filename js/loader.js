@@ -67,7 +67,10 @@ async function onFilePick(event) {
 
   const zip = await jszip.loadAsync(file) // .then(async function(zip) {
   var imgFiles = zip.filter((relativePath, file) => {
-    return !file.name.endsWith('.json');
+    const fileName = file.name;
+    return fileName.endsWith('.jpg')
+        || fileName.endsWith('.jpeg')
+        || fileName.endsWith('.png');
   });
   imgFiles.sort((a, b) => a.name > b.name);
 
