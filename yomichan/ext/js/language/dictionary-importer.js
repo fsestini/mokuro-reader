@@ -51,7 +51,7 @@ class DictionaryImporter {
         const index = JSON.parse(await indexFile.async('string'));
 
         //const indexSchema = await this._getSchema('/data/schemas/dictionary-index-schema.json');
-        const indexSchema = await this._getSchema('/yomichan/ext/data/schemas/dictionary-index-schema.json');
+        const indexSchema = await this._getSchema('yomichan/ext/data/schemas/dictionary-index-schema.json');
         this._validateJsonSchema(index, indexSchema, indexFileName);
 
         const dictionaryTitle = index.title;
@@ -265,17 +265,17 @@ class DictionaryImporter {
     _getDataBankSchemaPaths(version) {
         const termBank = (
             version === 1 ?
-            '/yomichan/ext/data/schemas/dictionary-term-bank-v1-schema.json' :
-            '/yomichan/ext/data/schemas/dictionary-term-bank-v3-schema.json'
+            'yomichan/ext/data/schemas/dictionary-term-bank-v1-schema.json' :
+            'yomichan/ext/data/schemas/dictionary-term-bank-v3-schema.json'
         );
-        const termMetaBank = '/yomichan/ext/data/schemas/dictionary-term-meta-bank-v3-schema.json';
+        const termMetaBank = 'yomichan/ext/data/schemas/dictionary-term-meta-bank-v3-schema.json';
         const kanjiBank = (
             version === 1 ?
-            '/yomichan/ext/data/schemas/dictionary-kanji-bank-v1-schema.json' :
-            '/yomichan/ext/data/schemas/dictionary-kanji-bank-v3-schema.json'
+            'yomichan/ext/data/schemas/dictionary-kanji-bank-v1-schema.json' :
+            'yomichan/ext/data/schemas/dictionary-kanji-bank-v3-schema.json'
         );
-        const kanjiMetaBank = '/yomichan/ext/data/schemas/dictionary-kanji-meta-bank-v3-schema.json';
-        const tagBank = '/yomichan/ext/data/schemas/dictionary-tag-bank-v3-schema.json';
+        const kanjiMetaBank = 'yomichan/ext/data/schemas/dictionary-kanji-meta-bank-v3-schema.json';
+        const tagBank = 'yomichan/ext/data/schemas/dictionary-tag-bank-v3-schema.json';
 
         return [termBank, termMetaBank, kanjiBank, kanjiMetaBank, tagBank];
     }

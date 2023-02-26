@@ -34,7 +34,7 @@ class DisplayGenerator {
 
     async prepare() {
         //// const html = await yomichan.api.getDisplayTemplatesHtml();
-        const html = await _fetchAsset('/yomichan/ext/display-templates.html');
+        const html = await _fetchAsset('yomichan/ext/display-templates.html');
         this._templates = new HtmlTemplateCollection(html);
         this.updateHotkeys();
     }

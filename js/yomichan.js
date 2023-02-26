@@ -12,7 +12,7 @@ var japaneseUtil;
     database: dictionaryDatabase
   });
   const deinflectionReasions =
-    await _fetchAsset('/yomichan/ext/data/deinflect.json', true);
+    await _fetchAsset('yomichan/ext/data/deinflect.json', true);
   translator.prepare(deinflectionReasions);
 
   // await prepareDictionaryMap();
