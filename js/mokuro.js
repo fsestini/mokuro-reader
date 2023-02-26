@@ -190,6 +190,15 @@ document.getElementById('menuDoublePageView').addEventListener('click', function
   updatePage(state.page_idx);
 }, false);
 
+document.getElementById('buttonDouble').addEventListener('click', function () {
+  const dpv = document.getElementById("menuDoublePageView")
+  dpv.checked = !dpv.checked;
+
+  state.singlePageView = !dpv.checked;
+  saveState();
+  updatePage(state.page_idx);
+}, false);
+
 document.getElementById('menuHasCover').addEventListener('click', function () {
   state.hasCover = document.getElementById("menuHasCover").checked;
   saveState();
