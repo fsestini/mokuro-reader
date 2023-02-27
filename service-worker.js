@@ -63,12 +63,22 @@ self.addEventListener('activate', (e) => {
   );
 });
 
+function isCachable(url) {
+  return url.endsWith('/') ||
+         url.endsWith('.js') ||
+         url.endsWith('.html') ||
+         url.endsWith('.css') ||
+         (precacheResources.any(res => url.endsWith(res)))
+}
+
 self.addEventListener('fetch', (event) => {
 
   event.respondWith(caches.open(cacheName).then((cache) => {
     return fetch(event.request.url, { cache: "reload" })
       .then((fetchedResponse) => {
-        cache.put(event.request, fetchedResponse.clone());
+        if (isCachable(event.request.url)) {
+          cache.put(event.request, fetchedResponse.clone());
+        }
 
         return fetchedResponse;
       }).catch(() => {
