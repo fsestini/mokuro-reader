@@ -143,11 +143,7 @@ self.addEventListener('activate', (e) => {
 });
 
 function isCachable(url) {
-  return url.endsWith('/') ||
-         url.endsWith('.js') ||
-         url.endsWith('.html') ||
-         url.endsWith('.css') ||
-         (precacheResources.any(res => url.endsWith(res)))
+  return url.endsWith('.js') || url.endsWith('.html') || url.endsWith('.css') || (precacheResources.some(res => url.endsWith(res)));
 }
 
 self.addEventListener('fetch', (event) => {
