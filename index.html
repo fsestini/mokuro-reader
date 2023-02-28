@@ -11,6 +11,7 @@
     <link rel="manifest" href="app.webmanifest">
 
     <link rel="stylesheet" href="css/mokuro.css">
+    <link rel="stylesheet" href="css/main.css">
 
     <script src="yomichan/ext/js/language/dictionary-database.js"></script>
     <script src="yomichan/ext/js/language/dictionary-importer.js"></script>
@@ -175,13 +176,13 @@
             Add Yomichan dictionary
         </h3>
         <div>
-            <input type="file" id="dict-picker" name="dict-picker" multiple />
+            <input type="file" id="dict-picker" name="dict-picker" />
         </div>
         <div>
-            <progress id="main-progress" value="15" max="100"></progress>
+            <progress id="main-progress" class="dict-progress" value="0" max="100"></progress>
         </div>
         <div>
-            <progress id="sub-progress" value="15" max="100"></progress>
+            <progress id="sub-progress" class="dict-progress" value="0" max="100"></progress>
         </div>
         <h3>
             Installed dictionaries
@@ -206,7 +207,6 @@
     <script src="js/loader.js"></script>
     <script src="js/dictionaries.js"></script>
     <script src="js/inject.js"></script>
-    <link rel="stylesheet" href="css/yomichan.css">
     <script>injectYomichan("yomichan.html");</script>
 </body>
 

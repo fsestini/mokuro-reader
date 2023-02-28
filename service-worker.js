@@ -1,10 +1,10 @@
-const cacheName = 'mokuro-web-cache-v4';
+const cacheName = 'mokuro-web-cache-v5';
 
 const precacheResources = [
   '.',
   'index.html',
   'css/mokuro.css',
-  'css/yomichan.css',
+  'css/main.css',
   'js/dictionaries.js',
   'js/inject.js',
   'js/loader.js',
