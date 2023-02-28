@@ -1,4 +1,4 @@
-const cacheName = 'mokuro-web-cache-v2';
+const cacheName = 'mokuro-web-cache-v3';
 
 const precacheResources = [
   '.',
@@ -20,6 +20,16 @@ const precacheResources = [
   'yomichan/ext/css/action-popup.css',
   'yomichan/ext/css/material.css',
 
+  'yomichan/ext/display-templates.html',
+
+  'yomichan/ext/data/schemas/dictionary-term-bank-v1-schema.json',
+  'yomichan/ext/data/schemas/dictionary-term-bank-v3-schema.json',
+  'yomichan/ext/data/schemas/dictionary-term-meta-bank-v3-schema.json',
+  'yomichan/ext/data/schemas/dictionary-kanji-bank-v1-schema.json',
+  'yomichan/ext/data/schemas/dictionary-kanji-bank-v3-schema.json',
+  'yomichan/ext/data/schemas/dictionary-kanji-meta-bank-v3-schema.json',
+  'yomichan/ext/data/schemas/dictionary-tag-bank-v3-schema.json',
+
   'yomichan/ext/js/language/dictionary-database.js',
   'yomichan/ext/js/language/dictionary-importer.js',
   'yomichan/ext/js/language/deinflector.js',
@@ -38,7 +48,9 @@ const precacheResources = [
   'yomichan/ext/js/dom/html-template-collection.js',
   'yomichan/ext/js/language/sandbox/dictionary-data-util.js',
   'yomichan/ext/lib/jszip.min.js',
-  'yomichan/ext/lib/wanakana.min.js'
+  'yomichan/ext/lib/wanakana.min.js',
+
+  'yomichan/ext/data/fonts/kanji-stroke-orders.ttf'
 ];
 
 self.addEventListener('install', (event) => {
