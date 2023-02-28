@@ -49,8 +49,10 @@ const precacheResources = [
   'yomichan/ext/js/language/sandbox/dictionary-data-util.js',
   'yomichan/ext/lib/jszip.min.js',
   'yomichan/ext/lib/wanakana.min.js',
+  'yomichan/ext/lib/wanakana.min.js.map',
 
   'yomichan/ext/data/fonts/kanji-stroke-orders.ttf',
+  'yomichan/ext/data/deinflect.json',
 
   'yomichan/ext/images/accessibility.svg',
   'yomichan/ext/images/add-term-kana.svg',
