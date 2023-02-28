@@ -249,7 +249,7 @@
 /* Fonts */
 @font-face {
     font-family: kanji-stroke-orders;
-    src: url('/data/fonts/kanji-stroke-orders.ttf');
+    src: url('yomichan/ext/data/fonts/kanji-stroke-orders.ttf');
 }
 
 
@@ -659,12 +659,12 @@ button.action-button:active {
     background-color: var(--action-button-active-color);
     box-shadow: none;
 }
-.icon[data-icon=view-note]      { background-image: url('/images/view-note.svg'); }
-.icon[data-icon=add-term-kanji] { background-image: url('/images/add-term-kanji.svg'); }
-.icon[data-icon=add-term-kana]  { background-image: url('/images/add-term-kana.svg'); }
-.icon[data-icon=play-audio]     { background-image: url('/images/play-audio.svg'); }
-.icon[data-icon=source-term]    { background-image: url('/images/source-term.svg'); }
-.icon[data-icon=entry-current]  { background-image: url('/images/entry-current.svg'); }
+.icon[data-icon=view-note]      { background-image: url('yomichan/ext/images/view-note.svg'); }
+.icon[data-icon=add-term-kanji] { background-image: url('yomichan/ext/images/add-term-kanji.svg'); }
+.icon[data-icon=add-term-kana]  { background-image: url('yomichan/ext/images/add-term-kana.svg'); }
+.icon[data-icon=play-audio]     { background-image: url('yomichan/ext/images/play-audio.svg'); }
+.icon[data-icon=source-term]    { background-image: url('yomichan/ext/images/source-term.svg'); }
+.icon[data-icon=entry-current]  { background-image: url('yomichan/ext/images/entry-current.svg'); }
 .action-icon {
     display: block;
     width: var(--action-button-size);
@@ -1014,12 +1014,12 @@ button.action-button:active {
     mask-position: center center;
     mask-mode: alpha;
     mask-size: contain;
-    mask-image: url(/images/material-right-arrow.svg);
+    mask-image: url(yomichan/ext/images/material-right-arrow.svg);
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: center center;
     -webkit-mask-mode: alpha;
     -webkit-mask-size: contain;
-    -webkit-mask-image: url(/images/material-right-arrow.svg);
+    -webkit-mask-image: url(yomichan/ext/images/material-right-arrow.svg);
 }
 .headword-list>.headword:not(:first-of-type) .headword-current-indicator,
 :root:not([data-popup-current-indicator-mode=triangle]) .headword-current-indicator {
@@ -1042,7 +1042,7 @@ button.action-button:active {
     width: var(--action-button-size);
     height: var(--action-button-size);
     display: block;
-    background-image: url('/images/entry-current.svg');
+    background-image: url('yomichan/ext/images/entry-current.svg');
 }
 
 

@@ -237,51 +237,51 @@ body {
     background-image: var(--icon-image);
 }
 .icon[data-icon=none]                    { --icon-image: linear-gradient(transparent, transparent); }
-.icon[data-icon=profile]                 { --icon-image: url(/images/profile.svg); }
-.icon[data-icon=cog]                     { --icon-image: url(/images/cog.svg); }
-.icon[data-icon=palette]                 { --icon-image: url(/images/palette.svg); }
-.icon[data-icon=popup]                   { --icon-image: url(/images/popup.svg); }
-.icon[data-icon=speaker]                 { --icon-image: url(/images/speaker.svg); }
-.icon[data-icon=scanning]                { --icon-image: url(/images/scanning.svg); }
-.icon[data-icon=text-parsing]            { --icon-image: url(/images/text-parsing.svg); }
-.icon[data-icon=translation]             { --icon-image: url(/images/translation.svg); }
-.icon[data-icon=book]                    { --icon-image: url(/images/book.svg); }
-.icon[data-icon=note-card]               { --icon-image: url(/images/note-card.svg); }
-.icon[data-icon=keyboard]                { --icon-image: url(/images/keyboard.svg); }
-.icon[data-icon=backup]                  { --icon-image: url(/images/backup.svg); }
-.icon[data-icon=lock]                    { --icon-image: url(/images/lock.svg); }
-.icon[data-icon=question-mark]           { --icon-image: url(/images/question-mark.svg); }
-.icon[data-icon=popup-size]              { --icon-image: url(/images/popup-size.svg); }
-.icon[data-icon=hamburger-menu]          { --icon-image: url(/images/hamburger-menu.svg); }
-.icon[data-icon=kebab-menu]              { --icon-image: url(/images/kebab-menu.svg); }
-.icon[data-icon=mouse]                   { --icon-image: url(/images/mouse.svg); }
-.icon[data-icon=exclamation-point-short] { --icon-image: url(/images/exclamation-point-short.svg); }
-.icon[data-icon=magnifying-glass]        { --icon-image: url(/images/magnifying-glass.svg); }
-.icon[data-icon=collapse]                { --icon-image: url(/images/collapse.svg); }
-.icon[data-icon=expand]                  { --icon-image: url(/images/expand.svg); }
-.icon[data-icon=window]                  { --icon-image: url(/images/window.svg); }
-.icon[data-icon=cross]                   { --icon-image: url(/images/cross.svg); }
-.icon[data-icon=checkmark]               { --icon-image: url(/images/checkmark.svg); }
-.icon[data-icon=sentence-parsing]        { --icon-image: url(/images/sentence-parsing.svg); }
-.icon[data-icon=question-mark]           { --icon-image: url(/images/question-mark.svg); }
-.icon[data-icon=question-mark-circle]    { --icon-image: url(/images/question-mark-circle.svg); }
-.icon[data-icon=question-mark-thick]     { --icon-image: url(/images/question-mark-thick.svg); }
-.icon[data-icon=left-chevron]            { --icon-image: url(/images/left-chevron.svg); }
-.icon[data-icon=right-chevron]           { --icon-image: url(/images/right-chevron.svg); }
-.icon[data-icon=double-down-chevron]     { --icon-image: url(/images/double-down-chevron.svg); }
-.icon[data-icon=plus-thick]              { --icon-image: url(/images/plus-thick.svg); }
-.icon[data-icon=clipboard]               { --icon-image: url(/images/clipboard.svg); }
-.icon[data-icon=key]                     { --icon-image: url(/images/key.svg); }
-.icon[data-icon=tag]                     { --icon-image: url(/images/tag.svg); }
-.icon[data-icon=accessibility]           { --icon-image: url(/images/accessibility.svg); }
-.icon[data-icon=connection]              { --icon-image: url(/images/connection.svg); }
-.icon[data-icon=external-link]           { --icon-image: url(/images/external-link.svg); }
+.icon[data-icon=profile]                 { --icon-image: url(yomichan/ext/images/profile.svg); }
+.icon[data-icon=cog]                     { --icon-image: url(yomichan/ext/images/cog.svg); }
+.icon[data-icon=palette]                 { --icon-image: url(yomichan/ext/images/palette.svg); }
+.icon[data-icon=popup]                   { --icon-image: url(yomichan/ext/images/popup.svg); }
+.icon[data-icon=speaker]                 { --icon-image: url(yomichan/ext/images/speaker.svg); }
+.icon[data-icon=scanning]                { --icon-image: url(yomichan/ext/images/scanning.svg); }
+.icon[data-icon=text-parsing]            { --icon-image: url(yomichan/ext/images/text-parsing.svg); }
+.icon[data-icon=translation]             { --icon-image: url(yomichan/ext/images/translation.svg); }
+.icon[data-icon=book]                    { --icon-image: url(yomichan/ext/images/book.svg); }
+.icon[data-icon=note-card]               { --icon-image: url(yomichan/ext/images/note-card.svg); }
+.icon[data-icon=keyboard]                { --icon-image: url(yomichan/ext/images/keyboard.svg); }
+.icon[data-icon=backup]                  { --icon-image: url(yomichan/ext/images/backup.svg); }
+.icon[data-icon=lock]                    { --icon-image: url(yomichan/ext/images/lock.svg); }
+.icon[data-icon=question-mark]           { --icon-image: url(yomichan/ext/images/question-mark.svg); }
+.icon[data-icon=popup-size]              { --icon-image: url(yomichan/ext/images/popup-size.svg); }
+.icon[data-icon=hamburger-menu]          { --icon-image: url(yomichan/ext/images/hamburger-menu.svg); }
+.icon[data-icon=kebab-menu]              { --icon-image: url(yomichan/ext/images/kebab-menu.svg); }
+.icon[data-icon=mouse]                   { --icon-image: url(yomichan/ext/images/mouse.svg); }
+.icon[data-icon=exclamation-point-short] { --icon-image: url(yomichan/ext/images/exclamation-point-short.svg); }
+.icon[data-icon=magnifying-glass]        { --icon-image: url(yomichan/ext/images/magnifying-glass.svg); }
+.icon[data-icon=collapse]                { --icon-image: url(yomichan/ext/images/collapse.svg); }
+.icon[data-icon=expand]                  { --icon-image: url(yomichan/ext/images/expand.svg); }
+.icon[data-icon=window]                  { --icon-image: url(yomichan/ext/images/window.svg); }
+.icon[data-icon=cross]                   { --icon-image: url(yomichan/ext/images/cross.svg); }
+.icon[data-icon=checkmark]               { --icon-image: url(yomichan/ext/images/checkmark.svg); }
+.icon[data-icon=sentence-parsing]        { --icon-image: url(yomichan/ext/images/sentence-parsing.svg); }
+.icon[data-icon=question-mark]           { --icon-image: url(yomichan/ext/images/question-mark.svg); }
+.icon[data-icon=question-mark-circle]    { --icon-image: url(yomichan/ext/images/question-mark-circle.svg); }
+.icon[data-icon=question-mark-thick]     { --icon-image: url(yomichan/ext/images/question-mark-thick.svg); }
+.icon[data-icon=left-chevron]            { --icon-image: url(yomichan/ext/images/left-chevron.svg); }
+.icon[data-icon=right-chevron]           { --icon-image: url(yomichan/ext/images/right-chevron.svg); }
+.icon[data-icon=double-down-chevron]     { --icon-image: url(yomichan/ext/images/double-down-chevron.svg); }
+.icon[data-icon=plus-thick]              { --icon-image: url(yomichan/ext/images/plus-thick.svg); }
+.icon[data-icon=clipboard]               { --icon-image: url(yomichan/ext/images/clipboard.svg); }
+.icon[data-icon=key]                     { --icon-image: url(yomichan/ext/images/key.svg); }
+.icon[data-icon=tag]                     { --icon-image: url(yomichan/ext/images/tag.svg); }
+.icon[data-icon=accessibility]           { --icon-image: url(yomichan/ext/images/accessibility.svg); }
+.icon[data-icon=connection]              { --icon-image: url(yomichan/ext/images/connection.svg); }
+.icon[data-icon=external-link]           { --icon-image: url(yomichan/ext/images/external-link.svg); }
 .icon[data-icon=material-down-arrow] {
-    --icon-image: url(/images/material-down-arrow.svg);
+    --icon-image: url(yomichan/ext/images/material-down-arrow.svg);
     --icon-size: var(--material-arrow-dimension2) var(--material-arrow-dimension1);
 }
 .icon[data-icon=material-right-arrow] {
-    --icon-image: url(/images/material-right-arrow.svg);
+    --icon-image: url(yomichan/ext/images/material-right-arrow.svg);
     --icon-size: var(--material-arrow-dimension1) var(--material-arrow-dimension2);
 }
 
@@ -336,20 +336,20 @@ label.checkbox {
     transition: opacity var(--animation-duration) linear, background-color var(--animation-duration) linear;
 }
 .checkbox-fill {
-    mask-image: url(/images/checkbox-fill.svg);
-    -webkit-mask-image: url(/images/checkbox-fill.svg);
+    mask-image: url(yomichan/ext/images/checkbox-fill.svg);
+    -webkit-mask-image: url(yomichan/ext/images/checkbox-fill.svg);
     background-color: var(--checkbox-unchecked-color);
     opacity: 0;
 }
 .checkbox-border {
-    mask-image: url(/images/checkbox-border.svg);
-    -webkit-mask-image: url(/images/checkbox-border.svg);
+    mask-image: url(yomichan/ext/images/checkbox-border.svg);
+    -webkit-mask-image: url(yomichan/ext/images/checkbox-border.svg);
     background-color: var(--checkbox-unchecked-color);
     opacity: 1;
 }
 .checkbox-check {
-    mask-image: url(/images/checkbox-check.svg);
-    -webkit-mask-image: url(/images/checkbox-check.svg);
+    mask-image: url(yomichan/ext/images/checkbox-check.svg);
+    -webkit-mask-image: url(yomichan/ext/images/checkbox-check.svg);
     background-color: var(--checkbox-check-color);
     opacity: 0;
 }
@@ -606,12 +606,12 @@ label.radio {
     -webkit-mask-size: var(--radio-size) var(--radio-size);
 }
 .radio-border {
-    mask-image: url(/images/radio-button.svg);
-    -webkit-mask-image: url(/images/radio-button.svg);
+    mask-image: url(yomichan/ext/images/radio-button.svg);
+    -webkit-mask-image: url(yomichan/ext/images/radio-button.svg);
 }
 .radio-dot {
-    mask-image: url(/images/radio-button-dot.svg);
-    -webkit-mask-image: url(/images/radio-button-dot.svg);
+    mask-image: url(yomichan/ext/images/radio-button-dot.svg);
+    -webkit-mask-image: url(yomichan/ext/images/radio-button-dot.svg);
     opacity: 1;
     transform: none;
     transition:
@@ -707,7 +707,7 @@ select {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
-    background-image: url(/images/material-down-arrow.svg);
+    background-image: url(yomichan/ext/images/material-down-arrow.svg);
     background-repeat: no-repeat;
     background-position: right calc(10em / var(--font-size-no-units)) center;
     background-color: var(--input-background-color);
