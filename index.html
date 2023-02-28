@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="css/mokuro.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="mybulma/css/mystyles.css">
 
     <script src="yomichan/ext/js/language/dictionary-database.js"></script>
     <script src="yomichan/ext/js/language/dictionary-importer.js"></script>
@@ -20,6 +21,9 @@
     <script src="yomichan/ext/js/data/json-schema.js"></script>
     <script src="yomichan/ext/js/core.js"></script>
     <script src="yomichan/ext/lib/jszip.min.js"></script>
+
+    <script src="lib/jszip-utils.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
 
     <script src="js/main.js"></script>
 </head>
@@ -144,6 +148,9 @@
                 <a href="#" class="dropdown-option" id="menuLoad">
                     <input type="file" id="filepick" accept=".zip">
                 </a>
+                <a href="#" class="dropdown-option" id="menuFetch">
+                    Fetch from server
+                </a>
                 <a href="#" class="dropdown-option" id="menuSettings">
                     Yomichan settings
                 </a>
@@ -201,6 +208,26 @@
             <progress id="load-progress" value="0" max="100"></progress>
         </div>
     </div>
+    <div id="fetchFromServerPopup" class="popup">
+        <div id="fetch-container">
+            <div class="columns">
+                <div class="column">
+                    <input type="text" class="input is-three-quarters" id="serverTextBox"
+                    placeholder="Server URL">
+                </div>
+                <div class="column">
+                    <button class="button" onclick="onFetchRequest()">
+                        Fetch
+                    </button>
+                </div>
+            </div>
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul id="bcul">
+                </ul>
+            </nav>
+            <div id="entries"></div>
+        </div>
+    </div>
     <a id="leftAScreen" href="#"></a><a id="rightAScreen" href="#"></a>
     <div id="pagesContainer">
         <a id="leftAPage" href="#"></a><a id="rightAPage" href="#"></a>
@@ -211,6 +238,8 @@
     <script src="js/loader.js"></script>
     <script src="js/dictionaries.js"></script>
     <script src="js/inject.js"></script>
+    <script src="js/library.js"></script>
+    <script src="js/fetch.js"></script>
     <script>injectYomichan("yomichan.html");</script>
 </body>
 

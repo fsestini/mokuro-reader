@@ -13,3 +13,41 @@
 .dict-progress {
   display: none;
 }
+
+#fetch-container {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+#entries {
+  /* height: 100%; */
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 20px;
+  max-width: 100px;
+}
+
+.stack-img {
+  margin-bottom: 1px;
+}
+
+.entry img {
+  box-shadow: 0 10px 6px -6px #777;
+}
+
+.entry p {
+  font-size: small;
+  margin-top: 0.5em;
+  overflow-y: scroll;
+  height: 4em;
+}

@@ -249,6 +249,12 @@ document.getElementById('menuAbout').addEventListener('click', function () {
   pz.pause();
 }, false);
 
+document.getElementById('menuFetch').addEventListener('click', function () {
+  document.getElementById('fetchFromServerPopup').style.display = 'block';
+  document.getElementById('dimOverlay').style.display = 'initial';
+  pz.pause();
+}, false);
+
 document.getElementById('menuSettings').addEventListener('click', function () {
   document.getElementById('yomisettings').style.display = 'block';
   document.getElementById('dimOverlay').style.display = 'initial';
@@ -266,6 +272,7 @@ document.getElementById('menuReset').addEventListener('click', function () {
 document.getElementById('dimOverlay').addEventListener('click', function () {
   document.getElementById('popupAbout').style.display = 'none';
   document.getElementById('yomisettings').style.display = 'none';
+  document.getElementById('fetchFromServerPopup').style.display = 'none';
   document.getElementById('dimOverlay').style.display = 'none';
   pz.resume();
 }, false);

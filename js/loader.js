@@ -8,11 +8,11 @@ function createPage(url, mokuroData) {
   page.classList.add('page');
   const pageContainer = document.createElement('div');
   pageContainer.classList.add('pageContainer');
+  pageContainer.style.backgroundImage = "url(\"" + url + "\")";
 
   pageContainer.style.width = mokuroData.img_width;
   pageContainer.style.height = mokuroData.img_height;
-  pageContainer.style.backgroundImage = "url(\"" + url + "\")";
-
+  
   var zindex = 12;
   for (const block of mokuroData.blocks) {
     const textBox = document.createElement('div');
@@ -69,15 +69,15 @@ async function onFilePick(event) {
   var imgFiles = zip.filter((relativePath, file) => {
     const fileName = file.name;
     return fileName.endsWith('.jpg')
-        || fileName.endsWith('.jpeg')
-        || fileName.endsWith('.png');
+      || fileName.endsWith('.jpeg')
+      || fileName.endsWith('.png');
   });
   imgFiles.sort((a, b) => a.name > b.name);
 
   showLoadProgress();
   loadProgress.max = imgFiles.length;
   loadProgress.value = 0;
-  
+
   for (const zipEntry of imgFiles) {
     var splitting = zipEntry.name.split('.');
     splitting[splitting.length - 1] = "json";
@@ -85,6 +85,7 @@ async function onFilePick(event) {
 
     const mokuroString = await zip.file(jsonFileName).async('string');
     const mokuroData = JSON.parse(mokuroString);
+
     const blob = await zipEntry.async('blob');
     const url = URL.createObjectURL(blob);
     urls.push(url);
