@@ -1,4 +1,4 @@
-const cacheName = 'mokuro-web-cache-v5';
+const cacheName = 'mokuro-web-cache-v6';
 
 const precacheResources = [
   '.',
@@ -22,6 +22,7 @@ const precacheResources = [
 
   'yomichan/ext/display-templates.html',
 
+  'yomichan/ext/data/schemas/dictionary-index-schema.json',
   'yomichan/ext/data/schemas/dictionary-term-bank-v1-schema.json',
   'yomichan/ext/data/schemas/dictionary-term-bank-v3-schema.json',
   'yomichan/ext/data/schemas/dictionary-term-meta-bank-v3-schema.json',
