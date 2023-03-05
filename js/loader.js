@@ -1,7 +1,7 @@
 const input = document.getElementById("filepick");
 input.addEventListener('change', onFilePick);
 
-var urls = [];
+var allocatedObjectURLs = [];
 
 function createPage(url, mokuroData) {
   const page = document.createElement('div');
@@ -50,22 +50,20 @@ function purgePages() {
 }
 
 function purgeURLs() {
-  for (const url of urls) {
+  for (const url of allocatedObjectURLs) {
     URL.revokeObjectURL(url);
   }
-  urls = [];
+  allocatedObjectURLs = [];
 }
 
-async function onFilePick(event) {
+function resetReader() {
   purgePages();
   purgeURLs();
+}
 
-  var file = event.target.files[0];
+async function loadFromZip(file) {
   const jszip = new JSZip();
-  var pages = [];
-  const leftA = document.getElementById('leftAPage')
-
-  const zip = await jszip.loadAsync(file) // .then(async function(zip) {
+  const zip = await jszip.loadAsync(file)
   var imgFiles = zip.filter((relativePath, file) => {
     const fileName = file.name;
     return fileName.endsWith('.jpg')
@@ -78,6 +76,8 @@ async function onFilePick(event) {
   loadProgress.max = imgFiles.length;
   loadProgress.value = 0;
 
+  var pairs = [];
+
   for (const zipEntry of imgFiles) {
     var splitting = zipEntry.name.split('.');
     splitting[splitting.length - 1] = "json";
@@ -88,23 +88,36 @@ async function onFilePick(event) {
 
     const blob = await zipEntry.async('blob');
     const url = URL.createObjectURL(blob);
-    urls.push(url);
-    pages.push(createPage(url, mokuroData));
-    // URL.revokeObjectURL(url);
+    allocatedObjectURLs.push(url);
+    pairs.push({ imgUrl: url, ocrData: mokuroData });
     loadProgress.value = loadProgress.value + 1;
   }
-  // });
 
-  for (let i = 0; i < pages.length; i++) {
-    const page = pages[i];
+  hideLoadProgress();
+
+  populatePairs(pairs, file.name);
+}
+
+// { imgUrl: ..., ocrData: ... }
+function populatePairs(pairs, key) {
+  const leftA = document.getElementById('leftAPage')
+
+  for (let i = 0; i < pairs.length; i++) {
+    const pair = pairs[i];
+    const page = createPage(pair.imgUrl, pair.ocrData);
     page.id = "page" + i;
     pc.insertBefore(page, leftA);
   }
 
-  storageKey = "mokuro_web_" + file.name;
+  storageKey = "mokuro_web_" + key;
   setupVolume();
+}
 
-  hideLoadProgress();
+async function onFilePick(event) {
+  resetReader();
+
+  var file = event.target.files[0];
+  await loadFromZip(file);
 }
 
 const dimOverlay = document.getElementById('dimOverlay');

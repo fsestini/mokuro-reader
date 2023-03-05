@@ -69,20 +69,40 @@ class LibraryDisplayManager {
   //     });
   // }
 
-  _generateZip(path, node, callback) {
+  _getUrlInfo(path, node) {
     const baseURL = this.serverUrl + "/" + path.join('/') + '/';
-    var zip = new JSZip();
+    var imgs = [];
+    var jsons = [];
+    var pairs = [];
 
     for (const fn of node.imageFileNames) {
       const url = baseURL + node.title + '/' + fn;
-      console.log('Planning to zip: ' + url);
-      zip.file(fn, urlToPromise(url), { binary: true });
+      imgs.push({name: fn, url: url});
     }
 
     for (const fn of node.jsonFileNames) {
       const url = baseURL + '_ocr/' + node.title + '/' + fn;
-      console.log('Planning to zip: ' + url);
-      zip.file(fn, urlToPromise(url), { binary: true });
+      jsons.push({name: fn, url: url});
+    }
+
+    for (let i = 0; i < imgs.length; i++) {
+      const imgInfo = imgs[i];
+      const jsonInfo = jsons[i];
+      pairs.push({fst: imgInfo, snd: jsonInfo});
+    }
+    return pairs;
+  }
+
+  _generateZip(path, node, callback) {
+    // const baseURL = this.serverUrl + "/" + path.join('/') + '/';
+    const infos = this._getUrlInfo(path, node);
+    var zip = new JSZip();
+
+    for (const info of infos) {
+      const imgInfo = info.fst;
+      const jsonInfo = info.snd;
+      zip.file(imgInfo.name, urlToPromise(imgInfo.url), { binary: true });
+      zip.file(jsonInfo.name, urlToPromise(jsonInfo.url), { binary: true });
     }
 
     zip.generateAsync({ type: "blob" }, callback)
@@ -94,6 +114,21 @@ class LibraryDisplayManager {
       });
   }
 
+  async _generateUrlOcrPairs(path, node) {
+    const infos = this._getUrlInfo(path, node);
+    var pairs = [];
+
+    for (const info of infos) {
+      const jsonUrl = info.snd.url;
+      const mokuroString = 
+        await fetch(jsonUrl, { mode: "cors" })
+               .then((response) => response.text());
+      const mokuroData = JSON.parse(mokuroString);
+      pairs.push({ imgUrl: info.fst.url, ocrData: mokuroData });
+    }
+
+    return pairs;
+  }
 
   createEntry(path, node) {
     const entry = document.createElement("div");
@@ -116,11 +151,16 @@ class LibraryDisplayManager {
         };
         break;
       case "archive":
-        entry.onclick = e => {
-          this._generateZip(path, node, (metadata) => {
-            console.log(metadata.currentFile);
-            p.innerText = Math.floor(metadata.percent) + '%';
-          });
+        entry.onclick = async e => {
+          resetReader();
+          const pairs = await this._generateUrlOcrPairs(path, node);
+          const key = path.join('_') + '_' + node.title;
+          populatePairs(pairs, key);
+          returnFromPopup();
+          // this._generateZip(path, node, (metadata) => {
+          //   console.log(metadata.currentFile);
+          //   p.innerText = Math.floor(metadata.percent) + '%';
+          // });
         };
         break;
     }

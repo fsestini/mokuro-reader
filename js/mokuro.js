@@ -269,12 +269,16 @@ document.getElementById('menuReset').addEventListener('click', function () {
   updateProperties();
 }, false);
 
-document.getElementById('dimOverlay').addEventListener('click', function () {
+function returnFromPopup() {
   document.getElementById('popupAbout').style.display = 'none';
   document.getElementById('yomisettings').style.display = 'none';
   document.getElementById('fetchFromServerPopup').style.display = 'none';
   document.getElementById('dimOverlay').style.display = 'none';
   pz.resume();
+}
+
+document.getElementById('dimOverlay').addEventListener('click', function () {
+  returnFromPopup();
 }, false);
 
 document.getElementById('menuFontSize').addEventListener('change', (e) => {
