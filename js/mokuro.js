@@ -461,6 +461,8 @@ function zoomDefault() {
 }
 
 function updatePage(new_page_idx) {
+  var promises = [];
+
   new_page_idx = Math.min(Math.max(new_page_idx, 0), num_pages - 1);
 
   getPage(state.page_idx).style.display = "none";
@@ -475,19 +477,25 @@ function updatePage(new_page_idx) {
     state.page_idx = new_page_idx - 1;
   }
 
-  getPage(state.page_idx).style.display = "inline-block";
-  getPage(state.page_idx).style.order = 2;
+  // var promises = [onPageAboutToShow(new_page_idx)];
 
+  promises.push(
+    onPageAboutToShow(state.page_idx).then(() => {
+      getPage(state.page_idx).style.display = "inline-block";
+      getPage(state.page_idx).style.order = 2;    
+    })
+  );
+  
   if (!state.singlePageView && state.page_idx < num_pages - 1 && !isPageFirstOfPair(state.page_idx + 1)) {
     state.page2_idx = state.page_idx + 1;
-    getPage(state.page2_idx).style.display = "inline-block";
 
-    if (state.r2l) {
-      getPage(state.page2_idx).style.order = 1;
-    } else {
-      getPage(state.page2_idx).style.order = 3;
-    }
-
+    promises.push(
+      onPageAboutToShow(state.page2_idx).then(() => {
+        getPage(state.page2_idx).style.display = "inline-block";
+        getPage(state.page2_idx).style.order = state.r2l ? 1 : 3;    
+      })
+    );
+    
   } else {
     state.page2_idx = -1;
   }
@@ -498,10 +506,14 @@ function updatePage(new_page_idx) {
   document.getElementById("pageIdxDisplay").innerHTML = (state.page_idx + 1) + page2_txt + '/' + num_pages;
 
   saveState();
-  zoomDefault();
-  if (state.eInkMode) {
-    eInkRefresh();
-  }
+
+  Promise.all(promises).then(() => {
+    zoomDefault();
+  });
+  // zoomDefault();
+  // if (state.eInkMode) {
+  //   eInkRefresh();
+  // }
 }
 
 function firstPage() {

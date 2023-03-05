@@ -152,15 +152,15 @@ class LibraryDisplayManager {
         break;
       case "archive":
         entry.onclick = async e => {
-          resetReader();
-          const pairs = await this._generateUrlOcrPairs(path, node);
-          const key = path.join('_') + '_' + node.title;
-          populatePairs(pairs, key);
-          returnFromPopup();
-          // this._generateZip(path, node, (metadata) => {
-          //   console.log(metadata.currentFile);
-          //   p.innerText = Math.floor(metadata.percent) + '%';
-          // });
+          // resetReader();
+          // const pairs = await this._generateUrlOcrPairs(path, node);
+          // const key = path.join('_') + '_' + node.title;
+          // populatePairs(pairs, key);
+          // returnFromPopup();
+          this._generateZip(path, node, (metadata) => {
+            console.log(metadata.currentFile);
+            p.innerText = Math.floor(metadata.percent) + '%';
+          });
         };
         break;
     }
