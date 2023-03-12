@@ -36,9 +36,23 @@ function populatePage(page, url, mokuroData) {
 
     for (const line of block.lines) {
       const p = document.createElement('p');
-      p.innerText = line;
+      // p.innerText = line;
+      
+      for (let i = 0; i < line.length; i++) {
+        const t = line[i];
+        const s = document.createElement("span");
+        s.innerText = t;
+        s.onclick = e => {
+          onSpanClick(s, e.clientX, e.clientY);
+          console.log(e.clientX, e.clientY);
+        };
+        p.appendChild(s);
+      }
+
       textBox.appendChild(p);
     }
+
+    initTextBox(textBox);
 
     pageContainer.appendChild(textBox);
     zindex += 1;

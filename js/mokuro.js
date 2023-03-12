@@ -114,22 +114,38 @@ function disablePanzoomOnElement(element) {
   return document.getElementById('topMenu').contains(element);
 }
 
-function initTextBoxes() {
-  // Add event listeners for toggling ocr text boxes with the toggleOCRTextBoxes option.
-  let textBoxes = document.querySelectorAll('.textBox');
-  for (let i = 0; i < textBoxes.length; i++) {
-    textBoxes[i].addEventListener('click', function (e) {
-      if (state.toggleOCRTextBoxes) {
-        this.classList.add('hovered');
-        // Remove hovered state from all other .textBoxes
-        for (let j = 0; j < textBoxes.length; j++) {
-          if (i !== j) {
-            textBoxes[j].classList.remove('hovered');
-          }
+function initTextBox(textBox) {
+  textBox.addEventListener('click', function (e) {
+    if (state.toggleOCRTextBoxes) {
+      this.classList.add('hovered');
+      // Remove hovered state from all other .textBoxes
+      for (let j = 0; j < textBoxes.length; j++) {
+        if (i !== j) {
+          textBoxes[j].classList.remove('hovered');
         }
       }
-    });
-  }
+    }
+  });
+}
+
+function initTextBoxes() {
+  // Add event listeners for toggling ocr text boxes with the toggleOCRTextBoxes option.
+  
+  // let textBoxes = document.querySelectorAll('.textBox');
+  // for (let i = 0; i < textBoxes.length; i++) {
+  //   textBoxes[i].addEventListener('click', function (e) {
+  //     if (state.toggleOCRTextBoxes) {
+  //       this.classList.add('hovered');
+  //       // Remove hovered state from all other .textBoxes
+  //       for (let j = 0; j < textBoxes.length; j++) {
+  //         if (i !== j) {
+  //           textBoxes[j].classList.remove('hovered');
+  //         }
+  //       }
+  //     }
+  //   });
+  // }
+  
   // When clicking off of a .textBox, remove the hovered state.
   document.addEventListener('click', function (e) {
     if (state.toggleOCRTextBoxes) {
