@@ -17,8 +17,6 @@ const precacheResources = [
   'yomichan.html',
   'mybulma/css/mystyles.css',
   'stack.png',
-  'lib/jszip-utils.min.js',
-  'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js',
 
   'yomichan/ext/css/display.css',
   'yomichan/ext/css/display-pronunciation.css',
