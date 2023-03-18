@@ -12,7 +12,6 @@ const precacheResources = [
   'js/mokuro.js',
   'js/panzoom.js',
   'js/yomichan.js',
-  'js/fetch.js',
   'js/library.js',
   'app.webmanifest',
   'yomichan.html',

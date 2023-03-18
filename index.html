@@ -148,9 +148,6 @@
                 <a href="#" class="dropdown-option" id="menuLoad">
                     <input type="file" id="filepick" accept=".zip">
                 </a>
-                <a href="#" class="dropdown-option" id="menuFetch">
-                    Fetch from server
-                </a>
                 <a href="#" class="dropdown-option" id="menuSettings">
                     Yomichan settings
                 </a>
@@ -208,26 +205,6 @@
             <progress id="load-progress" value="0" max="100"></progress>
         </div>
     </div>
-    <div id="fetchFromServerPopup" class="popup">
-        <div id="fetch-container">
-            <div class="columns">
-                <div class="column">
-                    <input type="text" class="input is-three-quarters" id="serverTextBox"
-                    placeholder="Server URL">
-                </div>
-                <div class="column">
-                    <button class="button" onclick="onFetchRequest()">
-                        Fetch
-                    </button>
-                </div>
-            </div>
-            <nav class="breadcrumb" aria-label="breadcrumbs">
-                <ul id="bcul">
-                </ul>
-            </nav>
-            <div id="entries"></div>
-        </div>
-    </div>
     <a id="leftAScreen" href="#"></a><a id="rightAScreen" href="#"></a>
     <div id="pagesContainer">
         <a id="leftAPage" href="#"></a><a id="rightAPage" href="#"></a>
@@ -239,7 +216,6 @@
     <script src="js/dictionaries.js"></script>
     <script src="js/inject.js"></script>
     <script src="js/library.js"></script>
-    <script src="js/fetch.js"></script>
     <script>injectYomichan("yomichan.html");</script>
 </body>
 
