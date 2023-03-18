@@ -136,18 +136,26 @@ async function asyncLoadFromZip(file) {
       || fileName.endsWith('.jpeg')
       || fileName.endsWith('.png');
   });
+  var jsonFiles = zip.filter((relativePath, file) => {
+    const fileName = file.name;
+    return fileName.endsWith('.json');
+  });
   imgFiles.sort((a, b) => a.name > b.name);
+  jsonFiles.sort((a, b) => a.name > b.name);
 
-  promisedPairs = imgFiles.map(zipEntry => {
-    var splitting = zipEntry.name.split('.');
-    splitting[splitting.length - 1] = "json";
-    const jsonFileName = splitting.join('.');
-    const jsonPromise = zip.file(jsonFileName).async('string')
+  const zipped = [];
+  for (let i = 0; i < imgFiles.length; i++) {
+    zipped.push([imgFiles[i], jsonFiles[i]]);
+  }
+
+  promisedPairs = zipped.map(xs => {
+    const zipEntry = xs[0];
+    const jsonEntry = xs[1];
+    const jsonPromise = jsonEntry.async('string')
       .then(mokuroString => JSON.parse(mokuroString));
     const urlPromise = zipEntry.async('blob')
       .then(blob => URL.createObjectURL(blob));
     return Promise.all([urlPromise, jsonPromise]);
-      //.then(values => return { imgUrl: values[0], ocrData: values[1] });
   });
 
   const leftA = document.getElementById('leftAPage')
